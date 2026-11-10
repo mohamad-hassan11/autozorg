@@ -1,0 +1,18 @@
+---
+import { business, content } from '../content.js';
+import Icon from './Icon.astro';
+import Brand from './Brand.astro';
+const { language } = Astro.props;
+const t = content[language];
+---
+<footer class="site-footer">
+  <div class="shell footer-main flex flex-wrap items-center justify-between">
+    <a class="brand" href="#top" aria-label={t.home}><Brand /></a>
+    <p>{t.footerLine}</p>
+    <a class="text-link" href="#top">{t.backTop}<Icon name="arrow" class="arrow-up" /></a>
+  </div>
+  <div class="shell footer-bottom flex flex-wrap items-center justify-between">
+    <span>Autozorg · {business.city}</span>
+    <span>{t.credit}</span>
+  </div>
+</footer>

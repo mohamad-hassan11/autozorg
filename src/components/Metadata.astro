@@ -1,0 +1,38 @@
+---
+import { business, content } from '../content.js';
+const { language } = Astro.props;
+const t = content[language];
+const pathname = language === 'nl' ? '/' : '/en/';
+const canonical = Astro.site ? new URL(pathname, Astro.site).href : undefined;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoRepair',
+  name: business.name,
+  telephone: business.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.street,
+    postalCode: business.postalCode,
+    addressLocality: business.city,
+    addressCountry: 'NL',
+  },
+  ...(canonical ? { url: canonical } : {}),
+};
+---
+<title>{t.title}</title>
+<meta name="description" content={t.description} />
+<meta property="og:title" content={t.title} />
+<meta property="og:description" content={t.description} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content={t.locale.replace('-', '_')} />
+<meta name="twitter:card" content="summary" />
+{canonical && (
+  <>
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
+    { [['nl', '/'], ['en', '/en/'], ['x-default', '/']].map(([lang, path]) => (
+      <link rel="alternate" hreflang={lang} href={new URL(path, Astro.site).href} />
+    )) }
+  </>
+)}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />

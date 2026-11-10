@@ -1,0 +1,28 @@
+---
+import Metadata from '../components/Metadata.astro';
+import '../styles/tailwind.css';
+import '../styles/main.scss';
+const { language = 'nl', notFound = false } = Astro.props;
+---
+<!doctype html>
+<html lang={language} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#11110f" />
+    {notFound ? (
+      <>
+        <title>Pagina niet gevonden / Page not found | Autozorg</title>
+        <meta name="robots" content="noindex" />
+      </>
+    ) : <Metadata language={language} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin />
+    <script is:inline src="/theme-init.js"></script>
+  </head>
+  <body class:list={{ 'not-found': notFound }}>
+    <slot />
+    <script src="../main.js"></script>
+  </body>
+</html>

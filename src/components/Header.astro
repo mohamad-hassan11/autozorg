@@ -1,0 +1,28 @@
+---
+import { business, content } from '../content.js';
+import Icon from './Icon.astro';
+import Brand from './Brand.astro';
+const { language } = Astro.props;
+const t = content[language];
+const call = `tel:${business.phone}`;
+---
+    <header class="site-header" id="top">
+      <div class="site-header__inner shell flex items-center justify-between">
+        <a class="brand" href={language === 'nl' ? '/' : '/en/'} aria-label={t.home}><Brand /></a>
+        <nav class="site-nav" id="site-nav" aria-label={t.navLabel}>
+          {['services', 'about', 'contact'].map((id, i) => <a href={`#${id}`}>{t.nav[i]}</a>)}
+        </nav>
+        <div class="header-controls flex items-center">
+          <a class="header-call" href={call}><Icon name="phone" /><span>{business.phoneDisplay}</span></a>
+          <nav class="language-switch flex items-center" aria-label={t.languageLabel}>
+            <a href="/" lang="nl" hreflang="nl" aria-current={language === 'nl' ? 'page' : undefined} data-language-link={language !== 'nl' ? '' : undefined} aria-label="Nederlands">NL</a>
+            <span aria-hidden="true">/</span>
+            <a href="/en/" lang="en" hreflang="en" aria-current={language === 'en' ? 'page' : undefined} data-language-link={language !== 'en' ? '' : undefined} aria-label="English">EN</a>
+          </nav>
+          <button class="icon-button theme-toggle" type="button" data-theme-toggle data-light-label={t.themeLight} data-dark-label={t.themeDark} aria-label={t.themeLight} title={t.themeLight} hidden>
+            <Icon name="sun" class="theme-sun" /><Icon name="moon" class="theme-moon" />
+          </button>
+          <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label={t.menu} hidden><Icon name="menu" class="menu-open-icon" /><Icon name="close" class="menu-close-icon" /></button>
+        </div>
+      </div>
+    </header>

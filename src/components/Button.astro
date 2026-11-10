@@ -1,0 +1,5 @@
+---
+import Icon from './Icon.astro';
+const { text, href, variant = 'primary', symbol = 'arrow' } = Astro.props;
+---
+<a class={`button button--${variant}`} href={href}>{text}<Icon name={symbol} /></a>

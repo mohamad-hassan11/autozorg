@@ -1,0 +1,82 @@
+---
+import { business, content } from '../content.js';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import Heading from './Heading.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const { language } = Astro.props;
+const t = content[language];
+const call = `tel:${business.phone}`;
+---
+<BaseLayout language={language}>
+  <a class="skip-link" href="#main">{t.skip}</a>
+  <Header language={language} />
+    <main id="main" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-image" aria-hidden="true">
+          <img src="/images/engine-1920.webp" srcset="/images/engine-960.webp 960w, /images/engine-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high">
+        </div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content shell">
+          <h1 id="hero-title"><Heading lines={t.headline} /></h1>
+          <p class="hero-text">{t.heroText}</p>
+          <div class="hero-actions flex flex-wrap items-center">
+            <Button text={t.call} href={call} variant="primary" symbol="phone" />
+            <a class="text-link hero-services" href="#services">{t.servicesLink}<Icon name="arrow" /></a>
+          </div>
+        </div>
+        <div class="hero-bottom shell flex flex-wrap items-center justify-between">
+          <a class="hero-address flex items-center" href={business.mapsUrl}><Icon name="pin" /><span>{business.street} <span class="address-divider" aria-hidden="true">/</span> {business.city}</span></a>
+          <span class="stock-caption">{t.stock}</span>
+        </div>
+      </section>
+      <section class="services section-pad" id="services" aria-labelledby="services-title">
+        <div class="shell services-layout">
+          <div class="section-intro">
+            <h2 id="services-title"><Heading lines={t.servicesTitle} /></h2>
+            <p>{t.servicesIntro}</p>
+            <a class="text-link" href={call}>{t.serviceCtaLink}<Icon name="diagonal" /></a>
+          </div>
+          <div class="service-list">
+            {t.services.map((service) => (
+              <details class="service" id={service.id}>
+                <summary>
+                  <Icon name={service.icon} class="service-icon" />
+                  <span class="service-heading"><span class="service-title">{service.title}</span><span class="service-subtitle">{service.subtitle}</span></span>
+                  <span class="service-expand"><Icon name="plus" /></span>
+                </summary>
+                <div class="service-content"><p>{service.description}</p><ul>{service.items.map((item) => <li>{item}</li>)}</ul></div>
+              </details>
+            ))}
+            <p class="service-note">{t.serviceCta} <a href={call}>{t.serviceCtaLink}<Icon name="arrow" /></a></p>
+          </div>
+        </div>
+      </section>
+      <section class="about section-pad" id="about" aria-labelledby="about-title">
+        <div class="shell about-layout">
+          <figure class="about-photo">
+            <img src="/images/repair-1000.webp" srcset="/images/repair-600.webp 600w, /images/repair-1000.webp 1000w" sizes="(min-width: 900px) 45vw, 90vw" width="1000" height="1500" alt={t.repairAlt} loading="lazy" decoding="async">
+            <figcaption>{t.stock}</figcaption>
+          </figure>
+          <div class="about-copy">
+            <h2 id="about-title"><Heading lines={t.aboutTitle} /></h2>
+            <p>{t.aboutText}</p><p>{t.aboutText2}</p>
+            <a class="text-link" href="#contact">{t.aboutLink}<Icon name="diagonal" /></a>
+            <div class="about-location"><Icon name="pin" /><span>{t.location}<small>{business.street} · {business.postalCode}</small></span></div>
+          </div>
+        </div>
+      </section>
+      <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
+        <div class="shell contact-layout">
+          <div class="contact-intro"><h2 id="contact-title"><Heading lines={t.contactTitle} /></h2><p>{t.contactText}</p></div>
+          <div class="contact-details">
+            <div class="contact-phone"><h3>{t.phoneLabel}</h3><a href={call}>{business.phoneDisplay}<Icon name="diagonal" /></a><p>{t.appointmentNote}</p></div>
+            <div class="contact-address"><h3>{t.addressLabel}</h3><address>{business.street}<br>{business.postalCode} {business.city}</address><Button text={t.directions} href={business.mapsUrl} variant="outline" symbol="diagonal" /></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  <Footer language={language} />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { business } from '../content.js';
+---
+<BaseLayout notFound>
+  <main class="shell">
+    <a class="brand" href="/">autozorg.</a>
+    <h1>Even terug<br />op de route.</h1>
+    <p>Deze pagina bestaat niet. Ga naar de homepage of bel ons.</p>
+    <p lang="en">This page could not be found. Head to the homepage or give us a call.</p>
+    <div class="flex flex-wrap gap-4">
+      <a class="button button--primary" href="/">Nederlands</a>
+      <a class="button button--outline" href="/en/" lang="en">English</a>
+      <a class="button button--outline" href={`tel:${business.phone}`}>{business.phoneDisplay}</a>
+    </div>
+  </main>
+</BaseLayout>
