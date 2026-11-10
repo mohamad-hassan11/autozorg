@@ -1,10 +1,11 @@
 ---
+import Brand from '../components/Brand.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { business } from '../content.js';
 ---
 <BaseLayout notFound>
   <main class="shell">
-    <a class="brand" href="/">autozorg.</a>
+    <a class="brand" href="/"><Brand /></a>
     <h1>Even terug<br />op de route.</h1>
     <p>Deze pagina bestaat niet. Ga naar de homepage of bel ons.</p>
     <p lang="en">This page could not be found. Head to the homepage or give us a call.</p>

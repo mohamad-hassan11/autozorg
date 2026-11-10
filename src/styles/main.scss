@@ -71,9 +71,9 @@ p { text-wrap: pretty; }
 .site-header { position: relative; z-index: 20; background: var(--page); border-bottom: 1px solid var(--rule); }
 .site-header__inner { min-height: 100px; gap: 2rem; }
 .brand { display: inline-flex; align-items: center; line-height: 1; flex-shrink: 0; }
-.wordmark { font-size: 2rem; letter-spacing: -0.04em; font-weight: 800; }
-.wordmark > span { font-weight: 500; }
-.wordmark .brand-period { color: var(--accent-text); font-weight: 800; }
+.brand-logo { display: block; width: 144px; height: auto; padding: 4px; }
+.brand-logo--light, [data-theme='light'] .brand-logo--dark { display: none; }
+[data-theme='light'] .brand-logo--light { display: block; }
 .site-nav { display: flex; align-items: center; gap: 2rem; font-size: 0.875rem; font-weight: 600; }
 .site-nav > a { padding-block: 1rem; transition: color 160ms ease-out; }
 .site-nav > a:hover { color: var(--accent-text); }
@@ -177,7 +177,7 @@ p { text-wrap: pretty; }
 .site-footer { padding-top: 3rem; }
 .footer-main { gap: 1.5rem; padding-bottom: 2.5rem; }
 .footer-main p { color: var(--muted); font-size: 0.875rem; }
-.footer-main .wordmark { font-size: 1.7rem; }
+.footer-main .brand-logo { width: 144px; }
 .arrow-up { rotate: -90deg; }
 .footer-bottom { gap: 0.5rem 2rem; padding-block: 1.3rem; border-top: 1px solid var(--rule); font-size: 0.6875rem; color: var(--muted); }
 .not-found { min-height: 100svh; display: grid; align-items: center; padding-block: 4rem; }
@@ -197,7 +197,7 @@ p { text-wrap: pretty; }
   .shell { width: calc(100% - 3rem); }
   .site-header__inner { min-height: 84px; flex-wrap: wrap; gap: 0; }
   .header-controls { gap: 0.75rem; }
-  .wordmark { font-size: 1.75rem; }
+  .brand-logo { width: 120px; }
   .site-nav { order: 3; width: 100%; gap: 2rem; padding-block: 0.5rem 1rem; }
   .menu-toggle { display: inline-grid; }
   .menu-ready .site-nav { display: none; position: absolute; inset: 100% 0 auto; padding: 1rem 1.5rem; background: var(--page); border-bottom: 1px solid var(--rule); }
@@ -225,7 +225,7 @@ p { text-wrap: pretty; }
   .shell { width: calc(100% - 2.5rem); }
   .section-pad { padding-block: 4.5rem; }
   .site-header__inner { min-height: 76px; }
-  .wordmark { font-size: 1.5rem; }
+  .brand-logo { width: 112px; }
   .header-controls { gap: 0.35rem; }
   .language-switch { gap: 0; font-size: 0.6875rem; }
   .language-switch a { padding-inline: 0.35rem; }
